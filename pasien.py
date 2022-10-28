@@ -29,7 +29,7 @@ class Pasien:
             f.write(','.join(data))
 
         with open(f"data_antrean/{nama_dokter[self.drID][3:].lower()}.csv", 'a') as f:
-            data_csv = ','.join([str(self.no_antre), self.nama, self.hp, nama_dokter[self.drID]])
+            data_csv = ','.join([str(self.no_antre), self.nama])
             f.write(f"\n{data_csv}")
         
     
