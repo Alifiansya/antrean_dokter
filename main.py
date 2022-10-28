@@ -8,37 +8,29 @@ from pasien import Pasien
 if __name__ == "__main__":
     pasien = Pasien()
     while True:
-        print("Data antrian dr.Samsudin: ")
+        print("Data antrian dr.Tulus: ")
         # Print table dari csv
-        df1 = pd.read_csv("data_antrean/samsudin.csv")
+        df1 = pd.read_csv("data_antrean/tulus.csv")
         print(tabulate(df1, headers = 'keys', tablefmt = 'fancy_grid')) 
 
-        print("Data antrian dr.Budi: ")
+        print("Data antrian dr.Gisel: ")
         # Print table dari csv
-        df2 = pd.read_csv("data_antrean/budi.csv")
+        df2 = pd.read_csv("data_antrean/gisel.csv")
         print(tabulate(df2, headers = 'keys', tablefmt = 'fancy_grid')) 
 
-        print("Data antrian dr.Supratman: ")
-        # Print table dari csv
-        df3 = pd.read_csv("data_antrean/supratman.csv")
-        print(tabulate(df3, headers = 'keys', tablefmt = 'fancy_grid')) 
         query = input("Apa yang ingin anda lakukan?: ").lower().lstrip().rstrip()
         match query:
             # Mengambil data dari console
             case "tambah data":
                 pasien.ambil_data()
                 pasien.masuk_csv()
-            case "next samsudin":
-                df = pd.read_csv("data_antrean/samsudin.csv")
+            case "next tulus":
+                df = pd.read_csv("data_antrean/tulus.csv")
                 df = df.iloc[1:, :]
-                df.to_csv('data_antrean/samsudin.csv', index=False)
-            case "next budi":
-                df = pd.read_csv("data_antrean/budi.csv")
+                df.to_csv('data_antrean/tulus.csv', index=False)
+            case "next gisel":
+                df = pd.read_csv("data_antrean/gisel.csv")
                 df = df.iloc[1:, :]
-                df.to_csv('data_antrean/budi.csv', index=False)
-            case "next supratman":
-                df = pd.read_csv("data_antrean/supratman.csv")
-                df = df.iloc[1:, :]
-                df.to_csv('data_antrean/supratman.csv', index=False)
+                df.to_csv('data_antrean/gisel.csv', index=False)
             case default:
                 print("coba lagi!")

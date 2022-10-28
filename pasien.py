@@ -12,9 +12,8 @@ class Pasien:
         self.hp = input("Masukan Nomor HP: ")
         print(
             "Dokter yang ada:\n",
-            "1. Dr.Samsudin\n",
-            "2. Dr.Supratman\n",
-            "3. Dr.Budi"
+            "1. Dr.Tulus\n",
+            "2. Dr.Gisel"
         )
         dokter_pilihan = input("Pilih nomor dokter yang ada: ")
         self.drID = int(dokter_pilihan) - 1
@@ -29,7 +28,7 @@ class Pasien:
             with open("nomor_antre.txt", 'w', newline='') as file:
                 file.write(','.join(data))
 
-        with open(f"data_antrean/{nama_dokter[self.drID][3:].lower()}.csv", 'a') as f:
+        with open(f"data_antrean/{nama_dokter[self.drID][3:].lower()}.csv", 'a', newline='') as f:
             data_csv = ','.join([str(self.no_antre), self.nama])
             f.write(f"\n{data_csv}")
         
