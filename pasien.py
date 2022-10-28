@@ -1,4 +1,4 @@
-import json
+import json, csv
 
 with open("dokter.json") as f:
     dokter = json.load(f)
@@ -20,13 +20,14 @@ class Pasien:
         self.drID = int(dokter_pilihan) - 1
         
     def masuk_csv(self):
-        with open("nomor_antre.txt", 'r+') as f:
+        with open("nomor_antre.txt", 'r') as f:
             data = f.read().split(',')
             print(data)
             data[self.drID] = int(data[self.drID]) + 1
             self.no_antre = data[self.drID]
             data[self.drID] = str(data[self.drID])
-            f.write(','.join(data))
+            with open("nomor_antre.txt", 'w', newline='') as file:
+                file.write(','.join(data))
 
         with open(f"data_antrean/{nama_dokter[self.drID][3:].lower()}.csv", 'a') as f:
             data_csv = ','.join([str(self.no_antre), self.nama])

@@ -22,7 +22,7 @@ if __name__ == "__main__":
         # Print table dari csv
         df3 = pd.read_csv("data_antrean/supratman.csv")
         print(tabulate(df3, headers = 'keys', tablefmt = 'fancy_grid')) 
-        query = input("Apa yang ingin anda lakukan?: ")
+        query = input("Apa yang ingin anda lakukan?: ").lower().lstrip().rstrip()
         match query:
             # Mengambil data dari console
             case "tambah data":
@@ -31,18 +31,14 @@ if __name__ == "__main__":
             case "next samsudin":
                 df = pd.read_csv("data_antrean/samsudin.csv")
                 df = df.iloc[1:, :]
-                print(df)
                 df.to_csv('data_antrean/samsudin.csv', index=False)
-                
             case "next budi":
                 df = pd.read_csv("data_antrean/budi.csv")
                 df = df.iloc[1:, :]
-                print(df)
                 df.to_csv('data_antrean/budi.csv', index=False)
             case "next supratman":
                 df = pd.read_csv("data_antrean/supratman.csv")
                 df = df.iloc[1:, :]
-                print(df)
                 df.to_csv('data_antrean/supratman.csv', index=False)
             case default:
                 print("coba lagi!")
