@@ -1,9 +1,14 @@
 import os
-from art import *
 from tabulate import tabulate
 from time import sleep
 import pandas as pd
 from pasien import Pasien
+
+def tampil_next(data_awal, dokter):
+    print(f"\nNomor antrean {data_awal[0]}")
+    print(f"Atas nama {data_awal[1]}")
+    print(f"Silahkan ke {dokter}\n")
+    sleep(3)
 
 if __name__ == "__main__":
     pasien = Pasien()
@@ -26,6 +31,7 @@ if __name__ == "__main__":
                 pasien.masuk_csv()
             case "next tulus":
                 df = pd.read_csv("data_antrean/tulus.csv")
+                tampil_next(df.iloc[0][:].to_list(), "dr. Tulus")
                 df = df.iloc[1:, :]
                 df.to_csv('data_antrean/tulus.csv', index=False)
             case "next gisel":
