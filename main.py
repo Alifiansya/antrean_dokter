@@ -36,6 +36,7 @@ if __name__ == "__main__":
                 df.to_csv('data_antrean/tulus.csv', index=False)
             case "next gisel":
                 df = pd.read_csv("data_antrean/gisel.csv")
+                tampil_next(df.iloc[0][:].to_list(), "dr. Gisel")
                 df = df.iloc[1:, :]
                 df.to_csv('data_antrean/gisel.csv', index=False)
             case default:
