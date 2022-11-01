@@ -33,6 +33,3 @@ if __name__ == "__main__":
         with open(csv_path, 'a', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames) 
             writer.writerow(data)
-        
-        
-
