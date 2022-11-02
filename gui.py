@@ -7,9 +7,10 @@ import csv
 class InputDataWin:
     def __init__(self):
         self.root = Tk()
+        self.root.title("Data pasien")
 
         mainframe = ttk.Frame(self.root, padding="3 3 12 12")
-        mainframe.grid(row=0, column=0, sticky=(N, E, W, S))
+        mainframe.grid(row=0, column=0, sticky=(N, E, W, S), padx=20)
         mainframe.rowconfigure(0, weight=1)
         mainframe.columnconfigure(0, weight=1)
 
