@@ -33,14 +33,15 @@ class InputDataWin:
         ttk.Radiobutton(mainframe, text="dr. Gisel", value="gisel", variable=self.dokter).grid(row=5, column=3,sticky=W)
 
         ttk.Button(mainframe, text="Submit", command=lambda: self.submit_data(mainframe)).grid(row=4, column=5, rowspan=2)
-    
+
     def submit_data(self,mainframe, *args):
         drId = 0 if self.dokter.get() == "tulus" else 1
         isidata = [self.nama.get(), self.alamat.get(), self.noTelp.get()]
 
         if "" in isidata:
-            warning_label = ttk.Label(mainframe, text="Jangan kosongkan data!", foreground="red")
+            warning_label = Label(mainframe, text="Jangan kosongkan data!", foreground="red")
             warning_label.grid(row=6, column=1, columnspan=6, sticky=N)
+            warning_label.after(3000, lambda: warning_label.destroy())
             return
 
         with open("no_antre.txt", "r") as f:
