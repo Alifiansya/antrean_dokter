@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from datetime import datetime
 from time import sleep
 import csv
 
@@ -31,18 +32,27 @@ class InputDataWin:
         ttk.Radiobutton(mainframe, text="dr. Tulus", value="tulus", variable=self.dokter).grid(row=4, column=3, sticky=W)
         ttk.Radiobutton(mainframe, text="dr. Gisel", value="gisel", variable=self.dokter).grid(row=5, column=3,sticky=W)
 
-        ttk.Button(mainframe, text="Submit", command=self.submit_data).grid(row=4, column=5, rowspan=2)
+        ttk.Button(mainframe, text="Submit", command=lambda: self.submit_data(mainframe)).grid(row=4, column=5, rowspan=2)
     
-    def submit_data(self, *args):
+    def submit_data(self,mainframe, *args):
         drId = 0 if self.dokter.get() == "tulus" else 1
+        isidata = [self.nama.get(), self.alamat.get(), self.noTelp.get()]
+
+        if "" in isidata:
+            warning_label = ttk.Label(mainframe, text="Jangan kosongkan data!", foreground="red")
+            warning_label.grid(row=6, column=1, columnspan=6, sticky=N)
+            return
+
         with open("no_antre.txt", "r") as f:
             no_antre = list(map(int, f.read().split(',')))
             no_antre[drId] += 1
             with open("no_antre.txt", "w") as fwrite:
                 fwrite.write(','.join(list(map(str, no_antre))))
 
-        isidata = [no_antre[drId], self.nama.get(), self.alamat.get(), self.noTelp.get()]
-        with open(f"{self.dokter.get()}.csv", 'a', newline='') as f:
+        isidata.insert(0, no_antre[drId])
+        isidata.append(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+
+        with open(f"data_antrean/{self.dokter.get()}.csv", 'a', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(isidata)
         self.root.destroy()
