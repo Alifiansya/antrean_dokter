@@ -5,7 +5,7 @@ from time import sleep
 import csv
 
 class InputDataWin:
-    def __init__(self):
+    def __init__(self, dashboard):
         self.root = Tk()
         self.root.title("Data pasien")
 
@@ -22,10 +22,10 @@ class InputDataWin:
         for i in range(1,5):
             ttk.Label(mainframe, text=": ").grid(row=i, column=2)
         
-        self.nama = StringVar()
-        self.alamat = StringVar()
-        self.noTelp = StringVar()
-        self.dokter = StringVar(None, "tulus")
+        self.nama = StringVar(self.root)
+        self.alamat = StringVar(self.root)
+        self.noTelp = StringVar(self.root)
+        self.dokter = StringVar(self.root, None, "tulus")
         
         ttk.Entry(mainframe, width=28, textvariable=self.nama).grid(row=1, column=3,columnspan=3, sticky=W)
         ttk.Entry(mainframe, width=28, textvariable=self.alamat).grid(row=2, column=3,columnspan=3, sticky=W)
@@ -33,9 +33,9 @@ class InputDataWin:
         ttk.Radiobutton(mainframe, text="dr. Tulus", value="tulus", variable=self.dokter).grid(row=4, column=3, sticky=W)
         ttk.Radiobutton(mainframe, text="dr. Gisel", value="gisel", variable=self.dokter).grid(row=5, column=3,sticky=W)
 
-        ttk.Button(mainframe, text="Submit", command=lambda: self.submit_data(mainframe)).grid(row=4, column=5, rowspan=2)
+        ttk.Button(mainframe, text="Submit", command=lambda: self.submit_data(mainframe, dashboard)).grid(row=4, column=5, rowspan=2)
 
-    def submit_data(self,mainframe, *args):
+    def submit_data(self,mainframe, dashboard, *args):
         drId = 0 if self.dokter.get() == "tulus" else 1
         isidata = [self.nama.get(), self.alamat.get(), self.noTelp.get()]
 
@@ -58,6 +58,8 @@ class InputDataWin:
             writer = csv.writer(f)
             writer.writerow(isidata)
         self.root.destroy()
+        dashboard.refresh_table()
+        
 
 
 
@@ -75,8 +77,17 @@ class Dashboard:
         topframe = ttk.Frame(mainframe, padding=5, border=5,relief="sunken")
         topframe.grid(row=0, column=0)
         ttk.Label(topframe, text="Dashboard Antrean", padding="85 5 85 5",font=("Times New Roman", 17, "bold")).grid(row=1, column=1)
-        ttk.Button(topframe, text='+', width=3).grid(row=1,column=2)
+        ttk.Button(topframe, text='+', width=3, command=self.get_data).grid(row=1,column=2)
+        self.make_table(mainframe)
 
+        self.refresh_table = lambda: self.make_table(mainframe)
+
+    def get_data(self):
+        input_win = InputDataWin(self)
+        input_win.root.mainloop()
+
+
+    def make_table(self, mainframe):
         botframe = ttk.Frame(mainframe, padding=5, border=5, relief="sunken")
         botframe.grid(row=1, column=0)
 
@@ -102,7 +113,6 @@ class Dashboard:
             namerow = ttk.Entry(tabel_gisel, justify="center")
             namerow.insert(0, "LoremIpsum")
             namerow.grid(row=i, column=1)
-        
 
 
 
