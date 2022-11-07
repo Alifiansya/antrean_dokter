@@ -59,7 +59,54 @@ class InputDataWin:
             writer.writerow(isidata)
         self.root.destroy()
 
+
+
+class Dashboard:
+    def __init__(self):
+        self.root = Tk()
+
+        mainframe = ttk.Frame(self.root, padding="3 3 12 12")
+        mainframe.grid(row=0, column=0, sticky="N E W S", padx=20)
+        mainframe.rowconfigure(0, weight=1)
+        mainframe.columnconfigure(0, weight=1)
+
+        s = ttk.Style()
+        s.configure("topframe.TFrame", font=('helvetica', 32))
+        topframe = ttk.Frame(mainframe, padding=5, border=5,relief="sunken")
+        topframe.grid(row=0, column=0)
+        ttk.Label(topframe, text="Dashboard Antrean", padding="85 5 85 5",font=("Times New Roman", 17, "bold")).grid(row=1, column=1)
+        ttk.Button(topframe, text='+', width=3).grid(row=1,column=2)
+
+        botframe = ttk.Frame(mainframe, padding=5, border=5, relief="sunken")
+        botframe.grid(row=1, column=0)
+
+        tabel_tulus = ttk.Frame(botframe, border=5, relief=RAISED)
+        tabel_tulus.grid(row=0, column=0)
+
+        tabel_gisel = ttk.Frame(botframe, border=5, relief="raised")
+        tabel_gisel.grid(row=0, column=1)
+
+
+        for i in range(10):
+            datarow = ttk.Entry(tabel_tulus, width=3, justify="center")
+            datarow.insert(0, str(i+1))
+            datarow.grid(row=i, column=0)
+            namerow = ttk.Entry(tabel_tulus, justify="center")
+            namerow.insert(0, "LoremIpsum")
+            namerow.grid(row=i, column=1)
+
+        for i in range(10):
+            datarow = ttk.Entry(tabel_gisel, width=3, justify="center")
+            datarow.insert(0, str(i+1))
+            datarow.grid(row=i, column=0)
+            namerow = ttk.Entry(tabel_gisel, justify="center")
+            namerow.insert(0, "LoremIpsum")
+            namerow.grid(row=i, column=1)
+        
+
+
+
 if __name__ == "__main__":
-    inputWin = InputDataWin()
-    inputWin.root.mainloop()
+    dashboard_win = Dashboard()
+    dashboard_win.root.mainloop()
 # END MAIN
