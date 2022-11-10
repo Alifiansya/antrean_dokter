@@ -12,6 +12,7 @@ Sebuah Klinik membutuhkan system antrean untuk pemeriksaan  dokter(GUI), dimana 
 ## Requirements
 + python3
 + pandas
++ tkinter
 + git (opsional)
 
 ## Cara Run
