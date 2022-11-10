@@ -3,6 +3,7 @@ from tkinter import ttk
 from datetime import datetime
 from time import sleep
 import csv
+import pandas as pd
 
 class InputDataWin:
     def __init__(self, dashboard):
@@ -22,10 +23,10 @@ class InputDataWin:
         for i in range(1,5):
             ttk.Label(mainframe, text=": ").grid(row=i, column=2)
         
-        self.nama = StringVar(self.root)
-        self.alamat = StringVar(self.root)
-        self.noTelp = StringVar(self.root)
-        self.dokter = StringVar(self.root, None, "tulus")
+        self.nama = StringVar(mainframe)
+        self.alamat = StringVar(mainframe)
+        self.noTelp = StringVar(mainframe)
+        self.dokter = StringVar(mainframe, "tulus")
         
         ttk.Entry(mainframe, width=28, textvariable=self.nama).grid(row=1, column=3,columnspan=3, sticky=W)
         ttk.Entry(mainframe, width=28, textvariable=self.alamat).grid(row=2, column=3,columnspan=3, sticky=W)
@@ -60,9 +61,6 @@ class InputDataWin:
         self.root.destroy()
         dashboard.refresh_table()
         
-
-
-
 class Dashboard:
     def __init__(self):
         self.root = Tk()
@@ -79,8 +77,8 @@ class Dashboard:
         ttk.Label(topframe, text="Dashboard Antrean", padding="85 5 85 5",font=("Times New Roman", 17, "bold")).grid(row=1, column=1)
         ttk.Button(topframe, text='+', width=3, command=self.get_data).grid(row=1,column=2)
         self.make_table(mainframe)
-
         self.refresh_table = lambda: self.make_table(mainframe)
+
 
     def get_data(self):
         input_win = InputDataWin(self)
@@ -97,24 +95,41 @@ class Dashboard:
         tabel_gisel = ttk.Frame(botframe, border=5, relief="raised")
         tabel_gisel.grid(row=0, column=1)
 
+        data_tulus = pd.read_csv("data_antrean/tulus.csv") 
+        data_gisel = pd.read_csv("data_antrean/gisel.csv")
+
+        label_tulus = ttk.Label(tabel_tulus,text="dr. Tulus", font=("Times New Roman", 14, "bold"))
+        label_tulus.grid(row=0, column=0, columnspan=2)
+
+        label_gisel = ttk.Label(tabel_gisel,text="dr. Gisel", font=("Times New Roman", 14, "bold"))
+        label_gisel.grid(row=0, column=0, columnspan=2)
 
         for i in range(10):
-            datarow = ttk.Entry(tabel_tulus, width=3, justify="center")
-            datarow.insert(0, str(i+1))
-            datarow.grid(row=i, column=0)
-            namerow = ttk.Entry(tabel_tulus, justify="center")
-            namerow.insert(0, "LoremIpsum")
-            namerow.grid(row=i, column=1)
+            # ============== Data Tulus ======================
+            no_antrean_tulus = ttk.Entry(tabel_tulus, width=3, justify="center")
+            nama_tulus = ttk.Entry(tabel_tulus, justify="center")
 
-        for i in range(10):
-            datarow = ttk.Entry(tabel_gisel, width=3, justify="center")
-            datarow.insert(0, str(i+1))
-            datarow.grid(row=i, column=0)
-            namerow = ttk.Entry(tabel_gisel, justify="center")
-            namerow.insert(0, "LoremIpsum")
-            namerow.grid(row=i, column=1)
+            no_antrean_tulus.grid(row=i+1, column=0)
+            nama_tulus.grid(row=i+1, column=1)
+            
+            if len(data_tulus) <= i:
+                no_antrean_tulus.insert(0, '')
+                nama_tulus.insert(0, '')
+            else:
+                no_antrean_tulus.insert(0, data_tulus.iloc[i,0])
+                nama_tulus.insert(0, data_tulus.iloc[i,1])
+            # =============== Data Gisel =======================
+            no_antrean_gisel = ttk.Entry(tabel_gisel, width=3, justify="center")
+            nama_gisel = ttk.Entry(tabel_gisel, justify="center")
 
+            no_antrean_gisel.grid(row=i+1, column=0)
+            nama_gisel.grid(row=i+1, column=1)
 
+            no_antrean_gisel.insert(0, '' if len(data_gisel) <= i else data_gisel.iloc[i, 0])
+            nama_gisel.insert(0, '' if len(data_gisel) <= i else data_gisel.iloc[i, 1])
+        
+        ttk.Button(tabel_tulus, text='=>', command=None).grid(row=11,column=0, columnspan=2)
+        ttk.Button(tabel_gisel, text='=>', command=None).grid(row=11,column=0, columnspan=2)
 
 if __name__ == "__main__":
     dashboard_win = Dashboard()
