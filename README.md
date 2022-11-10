@@ -1,7 +1,9 @@
 # Antrean Dokter
 Projek Akhir praktikum Pemrograman Lanjut
-\Muhammad Hilmi Alfaris (NIM 205150301111023)
-\Muhammad Alifiansyah Firdaus (NIM 215150307111025)
+\
+Muhammad Hilmi Alfaris (NIM 205150301111023)
+\
+Muhammad Alifiansyah Firdaus (NIM 215150307111025)
 \
 Deskripsi Program:
 Sebuah Klinik membutuhkan system antrean untuk pemeriksaan  dokter(GUI), dimana system tersebut memiliki menu sebagai berikut:
