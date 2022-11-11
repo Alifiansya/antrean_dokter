@@ -34,4 +34,4 @@ import os
 # Cuma buat ngeluarin window dashboardnya doang
 if __name__ == "__main__":
     dashboard_win = Dashboard()
-    dashboard_win.root.mainloop()
+    dashboard_win.mainloop()
