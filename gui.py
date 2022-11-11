@@ -21,13 +21,13 @@ class Dashboard(Tk):
 
         # Menginisialisasikan theme dashboard menggunakan theme yg
         # sama di semua os
-        self.style = ttk.Style()
+        self.style = ttk.Style(self)
         self.style.theme_use('classic')
         self.style.configure('.', background="#f0f0ed")
 
 
         # Container utama Dashboard
-        mainframe = ttk.Frame(self, padding="3 3 12 12")
+        mainframe = ttk.Frame(self, padding=5)
         mainframe.grid(row=0, column=0, sticky="N E W S", padx=20)
         mainframe.rowconfigure(0, weight=1)
         mainframe.columnconfigure(0, weight=1)
@@ -126,6 +126,10 @@ class InputDataWin(Tk):
         # root window dimasukin ke self biar bisa manggil mainloop
         super().__init__()
         self.title("Data pasien")
+        self.style = ttk.Style(self)
+        self.style.theme_use('classic')
+        self.style.configure('.', background="#f0f0ed")
+        
 
         # Container utama
         mainframe = ttk.Frame(self, padding="3 3 12 12")
