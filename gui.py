@@ -12,24 +12,33 @@ import pandas as pd
 # Membuat class dashboard yang berisi tabel data antrean
 # Dapat membuat instance dari objek InputDataWin dengan
 # menekan button '+' pada bagian kanan atas
-class Dashboard:
-    # Akan di-inisialisasi begitu main jalan
+
+class Dashboard(Tk):
+    # Di-derive dari class Tk agar dapat bisa langsung jadi window
     def __init__(self):
-        self.root = Tk()
+        super().__init__()
+        self.title("Dashboard")
+
+        # Menginisialisasikan theme dashboard menggunakan theme yg
+        # sama di semua os
+        self.style = ttk.Style()
+        self.style.theme_use('classic')
+        self.style.configure('.', background="#f0f0ed")
+
 
         # Container utama Dashboard
-        mainframe = ttk.Frame(self.root, padding="3 3 12 12")
+        mainframe = ttk.Frame(self, padding="3 3 12 12")
         mainframe.grid(row=0, column=0, sticky="N E W S", padx=20)
         mainframe.rowconfigure(0, weight=1)
         mainframe.columnconfigure(0, weight=1)
 
         # Membuat top container yang berisi label dashboard dan button '+'
-        topframe = ttk.Frame(mainframe, padding=5, border=5, relief="sunken")
-        topframe.grid(row=0, column=0)
-        ttk.Label(topframe, text="Dashboard Antrean", padding="85 5 85 5", font=(
-            "Times New Roman", 17, "bold")).grid(row=1, column=1)
+        topframe = ttk.Frame(mainframe, padding=5, relief="sunken")
+        topframe.grid(row=0, column=0, sticky="news")
+        ttk.Label(topframe, text="Dashboard Antrean", font=(
+            "Times New Roman", 17, "bold")).grid(row=1, column=1, padx="51 27")
         ttk.Button(topframe, text='+', width=3,
-                   command=self.get_data).grid(row=1, column=2)
+                   command=self.get_data).grid(row=1, column=3)
         self.make_table(mainframe)
         # Ngebuat lambda function biar bisa ngerefresh dari window lain
         self.refresh_table = lambda: self.make_table(mainframe)
@@ -37,7 +46,7 @@ class Dashboard:
     # Fungsi buat instance objek InputDataWin
     def get_data(self):
         input_win = InputDataWin(self)
-        input_win.root.mainloop()
+        input_win.mainloop()
 
     # Fungsi untuk membuat dan merefresh tabel (ngga bisa dipanggil langsung
     # dari window lain karena harus ngepass argumen mainframe dashboardnya 
@@ -111,15 +120,15 @@ class Dashboard:
 
 # Membuat class untuk window input
 # bakal di-inisialisasi pas pencet tombol '+' di dashboard
-class InputDataWin:
+class InputDataWin(Tk):
     # Ini untuk ngebuat windownya
     def __init__(self, dashboard):
         # root window dimasukin ke self biar bisa manggil mainloop
-        self.root = Tk()
-        self.root.title("Data pasien")
+        super().__init__()
+        self.title("Data pasien")
 
         # Container utama
-        mainframe = ttk.Frame(self.root, padding="3 3 12 12")
+        mainframe = ttk.Frame(self, padding="3 3 12 12")
         mainframe.grid(row=0, column=0, sticky=(N, E, W, S), padx=20)
         mainframe.rowconfigure(0, weight=1)
         mainframe.columnconfigure(0, weight=1)
@@ -194,7 +203,7 @@ class InputDataWin:
             writer.writerow(isidata)
         
         # Menghilangkan window dan merefresh tabel pada dashboard
-        self.root.destroy()
+        self.destroy()
         dashboard.refresh_table()
 
 
