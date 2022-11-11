@@ -1,4 +1,5 @@
-# projek-pemlan-pt
+# Antrean Dokter
+
 ## Macam macam querynya:
 + tambah data: untuk menambah data ke tabel
 + next (nama_dokter): untuk men-dequeue tabel dari dokter tsb
