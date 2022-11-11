@@ -18,6 +18,7 @@ class Dashboard(Tk):
     def __init__(self):
         super().__init__()
         self.title("Dashboard")
+        self.resizable(False, False)
 
         # Menginisialisasikan theme dashboard menggunakan theme yg
         # sama di semua os
@@ -126,6 +127,8 @@ class InputDataWin(Tk):
         # root window dimasukin ke self biar bisa manggil mainloop
         super().__init__()
         self.title("Data pasien")
+        self.resizable(False, False)
+        
         self.style = ttk.Style(self)
         self.style.theme_use('classic')
         self.style.configure('.', background="#f0f0ed")
