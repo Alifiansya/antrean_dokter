@@ -12,7 +12,7 @@ class Dashboard(Tk):
         super().__init__()
         self.title("Dashboard")
         self.resizable(False, False)
-        self.tk.call('tk', "scaling", 1.33)
+        self.tk.call('tk', "scaling", (self.winfo_screenmmwidth()/361) * 1.33)
 
         # Menginisialisasikan theme dashboard menggunakan theme yg
         # sama di semua os
