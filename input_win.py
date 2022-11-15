@@ -12,9 +12,7 @@ class InputDataWin(Tk):
         super().__init__()
         self.title("Data pasien")
         self.resizable(False, False)
-        
         self.style = ttk.Style(self)
-        self.style.theme_use('classic')
         self.style.configure('.', background="#f0f0ed")
         
 

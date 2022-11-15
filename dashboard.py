@@ -14,11 +14,7 @@ class Dashboard(Tk):
         super().__init__()
         self.title("Dashboard")
         self.resizable(False, False)
-
-        # Menginisialisasikan theme dashboard menggunakan theme yg
-        # sama di semua os
         self.style = ttk.Style(self)
-        self.style.theme_use('classic')
         self.style.configure('.', background="#f0f0ed")
 
         # Container utama Dashboard
@@ -42,8 +38,8 @@ class Dashboard(Tk):
 
     # Fungsi buat instance objek InputDataWin
     def get_data(self):
-        input_win = InputDataWin(self)
-        input_win.mainloop()
+        self.input_win = InputDataWin(self)
+        self.input_win.mainloop()
 
     # Fungsi untuk membuat dan merefresh tabel (ngga bisa dipanggil langsung
     # dari window lain karena harus ngepass argumen mainframe dashboardnya
