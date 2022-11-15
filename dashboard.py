@@ -6,20 +6,22 @@ import pandas as pd
 # Membuat class dashboard yang berisi tabel data antrean
 # Dapat membuat instance dari objek InputDataWin dengan
 # menekan button '+' pada bagian kanan atas
+
+
 class Dashboard(Tk):
     # Di-derive dari class Tk agar dapat bisa langsung jadi window
     def __init__(self):
         super().__init__()
         self.title("Dashboard")
         self.resizable(False, False)
-        self.tk.call('tk', "scaling", (self.winfo_screenmmwidth()/361) * 1.33)
+        self.scale = self.winfo_screenmmwidth()/361
+        self.tk.call('tk', "scaling", self.scale * 1.33)
 
         # Menginisialisasikan theme dashboard menggunakan theme yg
         # sama di semua os
         self.style = ttk.Style(self)
         self.style.theme_use('classic')
         self.style.configure('.', background="#f0f0ed")
-
 
         # Container utama Dashboard
         mainframe = ttk.Frame(self, padding=5)
@@ -30,10 +32,10 @@ class Dashboard(Tk):
         # Membuat top container yang berisi label dashboard dan button '+'
         topframe = ttk.Frame(mainframe, padding=5, relief="sunken")
         topframe.grid(row=0, column=0, sticky="news")
-    
+
         print(self.winfo_screenmmwidth())
         ttk.Label(topframe, text="Dashboard Antrean", font=(
-            "Times New Roman", 17, "bold"),relief=SUNKEN, anchor=CENTER).pack(side=LEFT)
+            "Times New Roman", int(self.scale * 21), "bold")).pack(side=LEFT, padx=f"{self.scale * 80} 0")
         ttk.Button(topframe, text='+', width=3,
                    command=self.get_data).pack(side=RIGHT)
         self.make_table(mainframe)
@@ -46,7 +48,7 @@ class Dashboard(Tk):
         input_win.mainloop()
 
     # Fungsi untuk membuat dan merefresh tabel (ngga bisa dipanggil langsung
-    # dari window lain karena harus ngepass argumen mainframe dashboardnya 
+    # dari window lain karena harus ngepass argumen mainframe dashboardnya
     # yang cuma ada di constructor aja, makanya dibuatlah lambda function
     # di constructornya)
     def make_table(self, mainframe):
@@ -108,7 +110,7 @@ class Dashboard(Tk):
             nama_gisel.insert(0, '' if len(data_gisel) <=
                               i else data_gisel.iloc[i, 1])
 
-        # Membuat button next untuk setiap tabel, melakukan 
+        # Membuat button next untuk setiap tabel, melakukan
         # dequeue (NOT IMPLEMENTED)
         ttk.Button(tabel_tulus, text='=>', command=None).grid(
             row=11, column=0, columnspan=2)
