@@ -14,8 +14,6 @@ class Dashboard(Tk):
         super().__init__()
         self.title("Dashboard")
         self.resizable(False, False)
-        self.scale = self.winfo_screenmmwidth()/361
-        self.tk.call('tk', "scaling", self.scale * 1.33)
 
         # Menginisialisasikan theme dashboard menggunakan theme yg
         # sama di semua os
@@ -32,7 +30,7 @@ class Dashboard(Tk):
         # Membuat top container yang berisi label dashboard dan button '+'
         topframe = ttk.Frame(mainframe, padding=5, relief="sunken")
         topframe.grid(row=0, column=0, sticky="news")
-
+    
         print(self.winfo_screenmmwidth())
         ttk.Label(topframe, text="Dashboard Antrean", font=(
             "Times New Roman", int(self.scale * 21), "bold")).pack(side=LEFT, padx=f"{self.scale * 80} 0")
