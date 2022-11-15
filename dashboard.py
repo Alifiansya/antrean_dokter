@@ -12,6 +12,7 @@ class Dashboard(Tk):
         super().__init__()
         self.title("Dashboard")
         self.resizable(False, False)
+        self.tk.call('tk', "scaling", 1.33)
 
         # Menginisialisasikan theme dashboard menggunakan theme yg
         # sama di semua os
@@ -30,7 +31,7 @@ class Dashboard(Tk):
         topframe = ttk.Frame(mainframe, padding=5, relief="sunken")
         topframe.grid(row=0, column=0, sticky="news")
     
-        print(topframe.winfo_screenmmwidth())
+        print(self.winfo_screenmmwidth())
         ttk.Label(topframe, text="Dashboard Antrean", font=(
             "Times New Roman", 17, "bold"),relief=SUNKEN, anchor=CENTER).pack(side=LEFT)
         ttk.Button(topframe, text='+', width=3,
