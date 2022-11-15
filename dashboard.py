@@ -33,7 +33,7 @@ class Dashboard(Tk):
     
         print(self.winfo_screenmmwidth())
         ttk.Label(topframe, text="Dashboard Antrean", font=(
-            "Times New Roman", int(self.scale * 21), "bold")).pack(side=LEFT, padx=f"{self.scale * 80} 0")
+            "Times New Roman", 21, "bold")).pack(side=LEFT)
         ttk.Button(topframe, text='+', width=3,
                    command=self.get_data).pack(side=RIGHT)
         self.make_table(mainframe)
