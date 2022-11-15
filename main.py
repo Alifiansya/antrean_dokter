@@ -1,4 +1,4 @@
-from gui import *
+from dashboard import Dashboard
 import csv
 import os
 
