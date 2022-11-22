@@ -1,12 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 from input_win import InputDataWin
+from notif import DequeueNotification
 import pandas as pd
 
 # Membuat class dashboard yang berisi tabel data antrean
 # Dapat membuat instance dari objek InputDataWin dengan
 # menekan button '+' pada bagian kanan atas
-
 
 class Dashboard(Tk):
     # Di-derive dari class Tk agar dapat bisa langsung jadi window
@@ -106,7 +106,19 @@ class Dashboard(Tk):
 
         # Membuat button next untuk setiap tabel, melakukan
         # dequeue (NOT IMPLEMENTED)
-        ttk.Button(tabel_tulus, text='=>', command=None).grid(
+        ttk.Button(tabel_tulus, text='=>', command=lambda: self.dq_table(0)).grid(
             row=11, column=0, columnspan=2)
-        ttk.Button(tabel_gisel, text='=>', command=None).grid(
+        ttk.Button(tabel_gisel, text='=>', command=lambda: self.dq_table(1)).grid(
             row=11, column=0, columnspan=2)
+    
+    def dq_table(self, id):
+        dr = "tulus" if not id else "gisel"
+        csv_data = pd.read_csv(f"data_antrean/{dr}.csv")
+        pass_data = csv_data.iloc[0, :].values.tolist()
+        csv_data = csv_data.iloc[1:, :]
+        #csv_data.to_csv(f"data_antrean/{dr}.csv", index=False)
+        pass_data = [pass_data[0], pass_data[1], dr]
+
+        
+        DequeueNotification(self, pass_data)
+        self.after(3000, self.refresh_table)
