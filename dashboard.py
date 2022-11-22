@@ -114,11 +114,11 @@ class Dashboard(Tk):
     def dq_table(self, id):
         dr = "tulus" if not id else "gisel"
         csv_data = pd.read_csv(f"data_antrean/{dr}.csv")
+        if csv_data.empty:
+            return
         pass_data = csv_data.iloc[0, :].values.tolist()
         csv_data = csv_data.iloc[1:, :]
-        #csv_data.to_csv(f"data_antrean/{dr}.csv", index=False)
+        csv_data.to_csv(f"data_antrean/{dr}.csv", index=False)
         pass_data = [pass_data[0], pass_data[1], dr]
-
-        
         DequeueNotification(self, pass_data)
         self.after(3000, self.refresh_table)
