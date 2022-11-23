@@ -8,11 +8,11 @@ class DequeueNotification(Toplevel):
         self.master = master
         self.title("Notifikasi")
         self.resizable(False, False)
+        self.after(10000, lambda: self.destroy())
         self.create_mainframe()
         self.add_style()
         self.create_nomor()
         self.create_tulisan()
-        self.after(3000, lambda: self.destroy())
         self.grab_set()
         self.wait_window()
         
@@ -25,7 +25,7 @@ class DequeueNotification(Toplevel):
     def create_nomor(self):
         no_container = ttk.Frame(self.mainframe)
         no_container.grid(row=0, column=0, sticky=W)
-        ttk.Label(no_container, text=self.data_pasien[0], font=("Times New Roman", 32, "bold"),padding=20, style="Nomor.TLabel").pack(padx=10)
+        ttk.Label(no_container, text=self.data_pasien[0], font=("Times New Roman", 32, "bold"), width=2, padding="25 20 25 20", style="Nomor.TLabel", anchor=CENTER).pack(padx=10)
     
     def create_tulisan(self):
         tulisan_container = ttk.Frame(self.mainframe, padding=10)
@@ -38,10 +38,3 @@ class DequeueNotification(Toplevel):
         style = ttk.Style(self)
         style.configure('.', background="#FFFFFF")
         style.configure('Nomor.TLabel', background="#8d8daa")
-
-
-if __name__ == "__main__":
-    mas = Tk()
-    DequeueNotification(mas, [1, "e3e2", "eq"]).show_dialog()
-    mas.mainloop()
-        
