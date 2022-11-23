@@ -24,7 +24,7 @@ class Dashboard(Tk):
         mainframe.columnconfigure(0, weight=1)
 
         # Membuat top container yang berisi label dashboard dan button '+'
-        topframe = ttk.Frame(mainframe, padding=5, relief="sunken")
+        topframe = ttk.Frame(mainframe, padding=5, border=5,relief="sunken")
         topframe.grid(row=0, column=0, sticky="news")
     
         print(self.winfo_screenmmwidth())
@@ -121,4 +121,4 @@ class Dashboard(Tk):
         csv_data.to_csv(f"data_antrean/{dr}.csv", index=False)
         pass_data = [pass_data[0], pass_data[1], dr]
         DequeueNotification(self, pass_data)
-        self.after(3000, self.refresh_table)
+        self.refresh_table()
