@@ -25,7 +25,7 @@ Sebuah Klinik membutuhkan system antrean untuk pemeriksaan  dokter(GUI), dimana 
 + Run main.py
 
 ## To-do list
-+ Buat dequeue bila pencet panah
++ <strike>Buat dequeue bila pencet panah</strike>
 + Pindah entry kebawah ketika pencet 'ENTER' pada keyboard di window input dan submit ketika cursor pada entry paling bawah
 + nengahin Title di class Dashboard
 + tabel jadi non-editable
