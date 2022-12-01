@@ -16,12 +16,9 @@ class InputDataWin(Tk):
         mainframe.rowconfigure(0, weight=1)
         mainframe.columnconfigure(0, weight=1)
 
-        ttk.Label(mainframe, text="Nama", width=7).grid(
-            row=1, column=1, pady=5)
-        ttk.Label(mainframe, text="Alamat", width=7).grid(
-            row=2, column=1, pady=5)
-        ttk.Label(mainframe, text="No.Telp", width=7).grid(
-            row=3, column=1, pady="5 10")
+        ttk.Label(mainframe, text="Nama", width=7).grid(row=1, column=1, pady=5)
+        ttk.Label(mainframe, text="Alamat", width=7).grid(row=2, column=1, pady=5)
+        ttk.Label(mainframe, text="No.Telp", width=7).grid(row=3, column=1, pady="5 10")
         ttk.Label(mainframe, text="Dokter", width=7).grid(row=4, column=1)
 
         for i in range(1, 5):
@@ -32,21 +29,15 @@ class InputDataWin(Tk):
         self.noTelp = StringVar(mainframe)
         self.dokter = StringVar(mainframe, "tulus")
 
-        ttk.Entry(mainframe, width=28, textvariable=self.nama).grid(
-            row=1, column=3, columnspan=3, sticky=W)
-        ttk.Entry(mainframe, width=28, textvariable=self.alamat).grid(
-            row=2, column=3, columnspan=3, sticky=W)
-        ttk.Entry(mainframe, width=28, textvariable=self.noTelp).grid(
-            row=3, column=3, columnspan=3, sticky=W)
-        ttk.Radiobutton(mainframe, text="dr. Tulus", value="tulus",
-                        variable=self.dokter).grid(row=4, column=3, sticky=W)
-        ttk.Radiobutton(mainframe, text="dr. Gisel", value="gisel",
-                        variable=self.dokter).grid(row=5, column=3, sticky=W)
+        ttk.Entry(mainframe, width=28, textvariable=self.nama).grid(row=1, column=3, columnspan=3, sticky=W)
+        ttk.Entry(mainframe, width=28, textvariable=self.alamat).grid(row=2, column=3, columnspan=3, sticky=W)
+        ttk.Entry(mainframe, width=28, textvariable=self.noTelp).grid(row=3, column=3, columnspan=3, sticky=W)
+        ttk.Radiobutton(mainframe, text="dr. Tulus", value="tulus", variable=self.dokter).grid(row=4, column=3, sticky=W)
+        ttk.Radiobutton(mainframe, text="dr. Gisel", value="gisel", variable=self.dokter).grid(row=5, column=3, sticky=W)
 
-        ttk.Button(mainframe, text="Submit", command=lambda: self.submit_data(
-            mainframe, dashboard)).grid(row=4, column=5, rowspan=2)
+        ttk.Button(mainframe, text="Submit", command=lambda: self.submit_data(mainframe, dashboard)).grid(row=4, column=5, rowspan=2)
 
-    def submit_data(self, mainframe, dashboard, *args):
+    def submit_data(self, mainframe, dashboard):
         drId = 0 if self.dokter.get() == "tulus" else 1
         isidata = [self.nama.get(), self.alamat.get(), self.noTelp.get()]
 
